@@ -36,6 +36,7 @@ class _firstState extends State<first> {
                   ListTile(
                     leading: Text("Camera"),
                     onTap: () async {
+                      Navigator.pop(context);
                       final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
                       if(photo!=null)
                         {
@@ -49,6 +50,7 @@ class _firstState extends State<first> {
                   ListTile(
                     leading: Text("Galary"),
                     onTap: () async {
+                      Navigator.pop(context);
                       final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
                       if(photo!=null)
                       {
