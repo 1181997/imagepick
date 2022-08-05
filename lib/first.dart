@@ -14,6 +14,8 @@ class _firstState extends State<first> {
   final ImagePicker _picker = ImagePicker();
 
   String imagepath="";
+  List<XFile>? imageFileList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,11 +24,13 @@ class _firstState extends State<first> {
       ),
       body: Column(
         children: [
-          Container(
-            height: 200,
-            width: 200,
-            child: imagepath.isEmpty
-            ? Icon(Icons.supervised_user_circle) :Image.file(File(imagepath)),
+          GridTile(
+            child: Container(
+              height: 200,
+              width: 200,
+              child: imagepath.isEmpty
+              ? Icon(Icons.supervised_user_circle) :Image.file(File(imagepath)),
+            ),
           ),
           OutlinedButton(onPressed: () {
             showDialog(context: context, builder: (context) {
@@ -52,15 +56,28 @@ class _firstState extends State<first> {
                     onTap: () async {
                       Navigator.pop(context);
                       final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
-                      if(photo!=null)
+                      //final List<XFile>? photo = await _picker.pickMultiImage();
+                      if(imageFileList!=null)
                       {
-                        imagepath=photo.path;
+                       imagepath=photo!.path;
+                       //imageFileList!.addAll(Iterable.empty());
                         setState(() {
 
                         });
                       }
                     },
                   )
+              // List<XFile>? imageFileList = [];
+              //
+              // void selectImages() async {
+              // final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+              // if (selectedImages!.isNotEmpty) {
+              // imageFileList!.addAll(selectedImages);
+              // }
+              // setState(() {
+              // });
+              // }
+
                 ],
               );
             },);
